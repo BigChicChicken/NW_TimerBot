@@ -62,4 +62,4 @@ Now the bots are ready to help you win your future wars. ⚔️
 License
 ----------
 
-This is completely free and released under the MIT License.
+This is completely free and released under the [MIT License](https://github.com/BigChicChicken/NW_TimerBot/blob/main/LICENSE).

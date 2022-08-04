@@ -3,9 +3,11 @@ A free discord bot to call the respawn time of wars in the NEW WORLD game.
 Installation
 --------------
 
-[Install NodeJs.](https://nodejs.org/)
+[Install FFmpeg](https://ffmpeg.org/)
 
-[Install Yarn.](https://yarnpkg.com/)
+[Install NodeJs](https://nodejs.org/)
+
+[Install Yarn](https://yarnpkg.com/)
 
 Download/Clone this repository.
 
@@ -52,8 +54,8 @@ USAGE
 ----------
 
 Under the root folder of this repository, launch the following commands:
-- `Yarn install`: Install all necessary dependecies.
-- `Yarn prod`: Turn on bots.
+- `yarn install`: Install all necessary dependecies.
+- `yarn prod`: Turn on bots.
 
 Now the bots are ready to help you win your future wars. ⚔️
 

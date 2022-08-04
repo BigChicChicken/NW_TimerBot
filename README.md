@@ -54,8 +54,8 @@ USAGE
 ----------
 
 Under the root folder of this repository, launch the following commands:
-- `yarn install`: Install all necessary dependecies.
-- `yarn prod`: Turn on bots.
+- `yarn install` : Install all necessary dependecies.
+- `yarn prod` : Turn on bots.
 
 Now the bots are ready to help you win your future wars. ⚔️
 

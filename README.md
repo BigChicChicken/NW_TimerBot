@@ -13,7 +13,7 @@ Download/Clone this repository.
 
 Configuration
 --------------
-In the `.env` update value with your data, like the exemple.
+In the `.env` update values with your data, like the exemple.
 
 Under **BOTS**, you will have to define:
 - **name**: The name of the bot, used to create an associated log file.

@@ -10,6 +10,7 @@ import Discord, { Intents, MessageActionRow, MessageButton, MessageEmbed, TextCh
 import { v4 as uuidv4 } from "uuid";
 import logger from "./Logger.js";
 import { AUDIO, RESPAWN } from "./config.js";
+import fetch from "node-fetch";
 
 class TimerBot
 {

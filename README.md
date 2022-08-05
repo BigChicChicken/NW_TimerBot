@@ -1,5 +1,7 @@
 A free discord bot to call the respawn time of wars in the NEW WORLD game.
 
+![](https://github.com/BigChicChicken/NW_TimerBot/blob/main/demo.gif "Demo")
+
 Prerequisite
 --------------
 

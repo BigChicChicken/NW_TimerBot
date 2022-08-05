@@ -3,9 +3,7 @@ A free discord bot to call the respawn time of wars in the NEW WORLD game.
 Prerequisite
 --------------
 
-Windows:
-
-[Windows-Build-Tools](https://www.npmjs.com/package/windows-build-tools)
+Windows : [Windows-Build-Tools](https://www.npmjs.com/package/windows-build-tools)
 
 Installation
 --------------

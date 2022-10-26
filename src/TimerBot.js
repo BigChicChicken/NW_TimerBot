@@ -1,16 +1,19 @@
 import path from "path";
-import {
-    AudioPlayerStatus,
-    createAudioPlayer,
-    createAudioResource,
-    joinVoiceChannel, VoiceConnectionStatus
-} from "@discordjs/voice";
 import fs from "fs";
 import Discord, { Intents, MessageActionRow, MessageButton, MessageEmbed, TextChannel } from "discord.js";
 import { v4 as uuidv4 } from "uuid";
 import logger from "./Logger.js";
 import { AUDIO, RESPAWN } from "./config.js";
 import fetch from "node-fetch";
+import { createRequire } from "module";
+
+const {
+    AudioPlayerStatus,
+    createAudioPlayer,
+    createAudioResource,
+    joinVoiceChannel,
+    VoiceConnectionStatus
+} = createRequire(import.meta.url)("@discordjs/voice");
 
 class TimerBot
 {

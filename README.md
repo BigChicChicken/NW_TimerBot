@@ -36,7 +36,7 @@ Step by step for Windows
 - Launch the `.msi` file.
 
 4. Install Yarn
-- Download [Yarn](https://objects.githubusercontent.com/github-production-release-asset-2e65be/49970642/ff4764f9-bcd8-485c-af33-9030f7fa1fdb?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20221026%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T190549Z&X-Amz-Expires=300&X-Amz-Signature=e20fa7da8b31b0562b1743ab68736d2e8e1af0529752f393b8980202c07cd3de&X-Amz-SignedHeaders=host&actor_id=40992270&key_id=0&repo_id=49970642&response-content-disposition=attachment%3B%20filename%3Dyarn-1.22.19.msi&response-content-type=application%2Foctet-stream)
+- Download [Yarn](https://github.com/yarnpkg/yarn/releases/download/v1.22.19/yarn-1.22.19.msi)
 - Launch the `.msi` file.
 
 5. Install Bot

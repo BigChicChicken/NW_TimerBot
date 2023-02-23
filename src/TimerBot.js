@@ -62,9 +62,10 @@ class TimerBot
     getInternetTime = async () => {
         const result = await fetch(`https://worldtimeapi.org/api/ip`)
             .then(response => response.json())
+            .catch(console.error)
         ;
 
-        if ('datetime' in result) {
+        if (result && result.hasOwnProperty('datetime')) {
             return new Date(result.datetime);
         }
 
@@ -94,7 +95,7 @@ class TimerBot
         this.logger.info('Start command launched.');
 
         const internetDate = await this.getInternetTime();
-        this.logger.info(`Internet : ${ await internetDate }`);
+        this.logger.info(`Internet : ${ internetDate }`);
         this.logger.info(`Current : ${ this.getCurrentTime() }`);
 
         const guild = await this.client.guilds.cache.get(id);
@@ -205,7 +206,7 @@ class TimerBot
                 new MessageEmbed()
                     .setColor('#e67d22')
                     .setTitle('Debug command')
-                    .setDescription(`Internet DateTime : ${ internetDate.toLocaleString() }\nCurrent DateTime : ${ this.getCurrentTime().toLocaleString() }`)
+                    .setDescription(`Internet DateTime : ${ internetDate?.toLocaleString() }\nCurrent DateTime : ${ this.getCurrentTime().toLocaleString() }`)
             ]
         });
     }

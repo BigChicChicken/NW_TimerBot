@@ -1,10 +1,9 @@
 import path from "path";
 import fs from "fs";
-import Discord, { Intents, MessageActionRow, MessageButton, MessageEmbed, TextChannel } from "discord.js";
+import Discord, { Intents, MessageActionRow, MessageButton, TextChannel } from "discord.js";
 import { v4 as uuidv4 } from "uuid";
 import logger from "./Logger.js";
 import { AUDIO, RESPAWN } from "./config.js";
-import fetch from "node-fetch";
 import { createRequire } from "module";
 
 const {
@@ -12,7 +11,8 @@ const {
     createAudioPlayer,
     createAudioResource,
     joinVoiceChannel,
-    VoiceConnectionStatus
+    VoiceConnectionStatus,
+    NoSubscriberBehavior
 } = createRequire(import.meta.url)("@discordjs/voice");
 
 class TimerBot
@@ -28,7 +28,11 @@ class TimerBot
                 Intents.FLAGS.GUILD_VOICE_STATES
             ]
         });
-        this.player = createAudioPlayer();
+        this.player = createAudioPlayer({
+            behaviors: {
+                noSubscriber: NoSubscriberBehavior.Play
+            }
+        });
         this.connection = null;
         this.interval = null;
 
@@ -59,19 +63,6 @@ class TimerBot
         return time;
     }
 
-    getInternetTime = async () => {
-        const result = await fetch(`https://worldtimeapi.org/api/ip`)
-            .then(response => response.json())
-            .catch(console.error)
-        ;
-
-        if (result && result.hasOwnProperty('datetime')) {
-            return new Date(result.datetime);
-        }
-
-        return null;
-    }
-
     getNextRespawn = (chrono) => {
         return RESPAWN.find((respawn) => chrono > respawn);
     }
@@ -94,8 +85,6 @@ class TimerBot
     startCommand = async ({ guild: { id } }) => {
         this.logger.info('Start command launched.');
 
-        const internetDate = await this.getInternetTime();
-        this.logger.info(`Internet : ${ internetDate }`);
         this.logger.info(`Current : ${ this.getCurrentTime() }`);
 
         const guild = await this.client.guilds.cache.get(id);
@@ -198,19 +187,6 @@ class TimerBot
         this.killAll();
     }
 
-    debugCommand = async ({ user }) => {
-        const internetDate = await this.getInternetTime();
-
-        user.send({
-            embeds: [
-                new MessageEmbed()
-                    .setColor('#e67d22')
-                    .setTitle('Debug command')
-                    .setDescription(`Internet DateTime : ${ internetDate?.toLocaleString() }\nCurrent DateTime : ${ this.getCurrentTime().toLocaleString() }`)
-            ]
-        });
-    }
-
     initialise = () => {
         this.client.login(this.token)
             .catch(console.error)
@@ -236,12 +212,6 @@ class TimerBot
                         emoji: '✋'
                     });
 
-                    const debugButton = new MessageButton()
-                        .setCustomId(uuidv4())
-                        .setStyle('SECONDARY')
-                        .setEmoji('❔')
-                    ;
-
                     await channel.bulkDelete(
                         (await channel.messages.fetch()).filter(({ author: { id } }) => id === this.client.application.id),
                         true
@@ -251,8 +221,7 @@ class TimerBot
                         components: [
                             new MessageActionRow().addComponents([
                                 startButton,
-                                stopButton,
-                                debugButton
+                                stopButton
                             ])
                         ]
                     });
@@ -266,8 +235,7 @@ class TimerBot
                         components: [
                             new MessageActionRow().addComponents([
                                 startButton,
-                                stopButton,
-                                debugButton
+                                stopButton
                             ])
                         ]
                     });
@@ -284,10 +252,6 @@ class TimerBot
                                     break;
                                 case stopButton.customId:
                                     this.stopCommand(interaction);
-                                    interaction.deferUpdate();
-                                    break;
-                                case debugButton.customId:
-                                    this.debugCommand(interaction);
                                     interaction.deferUpdate();
                                     break;
                             }
